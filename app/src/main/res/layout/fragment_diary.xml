@@ -52,16 +52,25 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/border2">
 
+                        <TextView
+                            android:id="@+id/breakfast_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
                         <Button
                             android:id="@+id/button_add_breakfast"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/add_breakfast_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
                             android:layout_marginBottom="@dimen/margin_divider_top_bottom"
                             android:layout_marginStart="@dimen/margin_start_button"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
-
+                            app:layout_constraintTop_toBottomOf="@id/breakfast_food_list"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -105,16 +114,25 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/border4">
 
+                        <TextView
+                            android:id="@+id/lunch_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
                         <Button
                             android:id="@+id/button_add_lunch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/add_lunch_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
                             android:layout_marginBottom="@dimen/margin_divider_top_bottom"
                             android:layout_marginStart="@dimen/margin_start_button"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
-
+                            app:layout_constraintTop_toBottomOf="@id/lunch_food_list"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -158,16 +176,25 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/border6">
 
+                        <TextView
+                            android:id="@+id/dinner_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
                         <Button
                             android:id="@+id/button_add_dinner"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/add_dinner_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
                             android:layout_marginBottom="@dimen/margin_divider_top_bottom"
                             android:layout_marginStart="@dimen/margin_start_button"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
-
+                            app:layout_constraintTop_toBottomOf="@id/dinner_food_list"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -211,16 +238,25 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@id/border8">
 
+                        <TextView
+                            android:id="@+id/snack_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
                         <Button
                             android:id="@+id/button_add_snack"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/add_snack_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
                             android:layout_marginBottom="@dimen/margin_divider_top_bottom"
                             android:layout_marginStart="@dimen/margin_start_button"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
-
+                            app:layout_constraintTop_toBottomOf="@id/snack_food_list"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
