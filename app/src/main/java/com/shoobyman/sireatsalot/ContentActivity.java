@@ -21,7 +21,9 @@ import com.shoobyman.sireatsalot.databinding.ActivityContentBinding;
 public class ContentActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
-    private final String ADD_CONTACT_TAG = "add contact";
+    public static final int FRAG_DIARY = 1;
+    public static final int FRAG_SUMMARY = 2;
+    public static final int FRAG_PROGRESS = 3;
 
     private ActivityContentBinding mBinding;
     private DiaryViewModel mData;
@@ -33,33 +35,40 @@ public class ContentActivity extends AppCompatActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_content);
         mData = new ViewModelProvider(this).get(DiaryViewModel.class);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new DiaryFragment()).commit();
         init();
     }
 
     private void init() {
+        switch (mData.getLastFragmentDisplayed()) {
+            case FRAG_DIARY:
+                displayDiaryFrag();
+                break;
+            case FRAG_SUMMARY:
+                displaySummaryFrag();
+                break;
+            case FRAG_PROGRESS:
+                displayProgressFrag();
+                break;
+        }
+
         mBinding.bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment selectedFrag;
 
                 switch(menuItem.getItemId()) {
                     case R.id.nav_diary:
-                        selectedFrag = new DiaryFragment();
-                        break;
+                        displayDiaryFrag();
+                        return true;
                     case R.id.nav_summary:
-                        selectedFrag = new SummaryFragment();
-                        break;
+                        displaySummaryFrag();
+                        return true;
                     case R.id.nav_progress:
-                        selectedFrag = new ProgressFragment();
-                        break;
+                        displayProgressFrag();
+                        return true;
                     default:
-                        Log.w(TAG, "The selected bottom naviation tab doesn't exist!");
+                        Log.w(TAG, "The selected bottom navigation tab doesn't exist!");
                         return false;
                 }
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, selectedFrag).commit();
-                return true;
             }
         });
     }
@@ -83,6 +92,21 @@ public class ContentActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void displayDiaryFrag() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new DiaryFragment()).commit();
+        mData.saveNewFragmentState(FRAG_DIARY);
+    }
+
+    public void displaySummaryFrag() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new SummaryFragment()).commit();
+        mData.saveNewFragmentState(FRAG_SUMMARY);
+    }
+
+    public void displayProgressFrag() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_fragment, new ProgressFragment()).commit();
+        mData.saveNewFragmentState(FRAG_PROGRESS);
     }
 
 }

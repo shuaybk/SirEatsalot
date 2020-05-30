@@ -4,4 +4,5 @@
     <dimen name="margin_divider_top_bottom">10dp</dimen>
     <dimen name="margin_start_header">20dp</dimen>
     <dimen name="margin_previous_meal">50dp</dimen>
+    <dimen name="margin_start_button">20dp</dimen>
 </resources>

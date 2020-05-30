@@ -10,6 +10,11 @@
     <string name="add_food_menu_text">Add Food</string>
     <string name="cancel_button">Cancel</string>
     <string name="add_button">Add</string>
+    <string name="add_breakfast_button_text">Add Breakfast</string>
+    <string name="add_lunch_button_text">Add Lunch</string>
+    <string name="add_dinner_button_text">Add Dinner</string>
+    <string name="add_snack_button_text">Add Snack</string>
+
 
     <!-- Tab titles -->
     <string name="nav_diary_tab_text">Diary</string>

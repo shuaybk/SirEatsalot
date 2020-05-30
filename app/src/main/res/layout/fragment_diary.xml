@@ -23,7 +23,7 @@
                         android:id="@+id/border1"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="20dp"
@@ -40,7 +40,7 @@
                         android:id="@+id/border2"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
@@ -50,7 +50,25 @@
                         android:id="@+id/breakfast_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@id/border2">
+                        app:layout_constraintTop_toBottomOf="@id/border2">
+
+                        <Button
+                            android:id="@+id/button_add_breakfast"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_breakfast_button_text"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_breakfast" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -58,7 +76,7 @@
                         android:id="@+id/border3"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="@dimen/margin_previous_meal"
@@ -75,7 +93,7 @@
                         android:id="@+id/border4"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
@@ -85,7 +103,25 @@
                         android:id="@+id/lunch_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@id/border4">
+                        app:layout_constraintTop_toBottomOf="@id/border4">
+
+                        <Button
+                            android:id="@+id/button_add_lunch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_lunch_button_text"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_lunch" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,7 +129,7 @@
                         android:id="@+id/border5"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="@dimen/margin_previous_meal"
@@ -110,7 +146,7 @@
                         android:id="@+id/border6"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
@@ -120,7 +156,25 @@
                         android:id="@+id/dinner_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@id/border6">
+                        app:layout_constraintTop_toBottomOf="@id/border6">
+
+                        <Button
+                            android:id="@+id/button_add_dinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_dinner_button_text"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_dinner" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -128,7 +182,7 @@
                         android:id="@+id/border7"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="@dimen/margin_previous_meal"
@@ -145,7 +199,7 @@
                         android:id="@+id/border8"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/border_divider"
+                        android:background="@color/border_divider_dark"
                         android:layout_marginStart="@dimen/margin_divider_start_end"
                         android:layout_marginEnd="@dimen/margin_divider_start_end"
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
@@ -155,7 +209,25 @@
                         android:id="@+id/snacks_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="@id/border6">
+                        app:layout_constraintTop_toBottomOf="@id/border8">
+
+                        <Button
+                            android:id="@+id/button_add_snack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_snack_button_text"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_snack" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

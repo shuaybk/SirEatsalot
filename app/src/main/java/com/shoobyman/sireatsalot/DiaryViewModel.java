@@ -14,9 +14,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class DiaryViewModel extends ViewModel {
-    private final String TAG = this.getClass().getSimpleName();
 
+    private final String TAG = this.getClass().getSimpleName();
     private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
+    private int currentFragment = ContentActivity.FRAG_DIARY;
 
     public FirebaseUser getUser() {
         return fbAuth.getCurrentUser();
@@ -32,6 +33,15 @@ public class DiaryViewModel extends ViewModel {
                 context.startActivity(intent);
             }
         });
+    }
+
+    //Make sure to call this when changing the fragment so it can be restored on activity recreation
+    public void saveNewFragmentState(int fragmentId) {
+        currentFragment = fragmentId;
+    }
+
+    public int getLastFragmentDisplayed() {
+        return currentFragment;
     }
 
     @Override
