@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">SirEatsalot</string>
+
+    <!-- Display messages -->
+    <string name="sign_in_message">Click here to sign in or register!</string>
+    <string name="sign_in_failed_message">Unable to sign in</string>
+
+    <!-- Button text -->
+    <string name="sign_out_menu_text">Sign Out</string>
+    <string name="add_food_menu_text">Add Food</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="add_button">Add</string>
+
+    <!-- Labels -->
+    <string name="Food">Food</string>
+
+    <!-- Hints -->
+    <string name="food_hint">Enter Food</string>
+
+
 </resources>
