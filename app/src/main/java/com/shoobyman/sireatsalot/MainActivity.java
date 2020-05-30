@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchChatActivity() {
-        Intent intent = new Intent(this, DiaryActivity.class);
+        Intent intent = new Intent(this, ContentActivity.class);
         startActivity(intent);
     }
 }
