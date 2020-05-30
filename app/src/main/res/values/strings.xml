@@ -12,7 +12,11 @@
     <string name="add_button">Add</string>
 
     <!-- Labels -->
-    <string name="Food">Food</string>
+    <string name="food">Food</string>
+    <string name="breakfast_header_label">Breakfast</string>
+    <string name="lunch_header_label">Lunch</string>
+    <string name="dinner_header_label">Dinner</string>
+    <string name="snacks_header_label">Snacks</string>
 
     <!-- Hints -->
     <string name="food_hint">Enter Food</string>

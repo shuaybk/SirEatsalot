@@ -27,7 +27,6 @@ public class DiaryActivity extends AppCompatActivity {
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_diary);
         model = new ViewModelProvider(this).get(DiaryViewModel.class);
-        mBinding.usernameText.setText("User is: uid=" + model.getUser().getUid() + ", display name = " + model.getUser().getDisplayName());
     }
 
     @Override

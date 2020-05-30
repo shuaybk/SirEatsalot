@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         } else { //display sign in prompt
             mBinding.mainContainer.setVisibility(View.VISIBLE);
             mBinding.loadingContainer.setVisibility(View.GONE);
-            
+
             mBinding.signInText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
