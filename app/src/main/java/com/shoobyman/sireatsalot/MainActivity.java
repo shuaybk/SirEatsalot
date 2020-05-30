@@ -32,9 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseAuth fbAuth = FirebaseAuth.getInstance();
 
-        if (fbAuth.getCurrentUser() != null) {
+        if (fbAuth.getCurrentUser() != null) { //proceed to diary activity
             launchChatActivity();
-        } else {
+        } else { //display sign in prompt
+            mBinding.mainContainer.setVisibility(View.VISIBLE);
+            mBinding.loadingContainer.setVisibility(View.GONE);
+            
             mBinding.signInText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
