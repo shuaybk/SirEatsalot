@@ -9,11 +9,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.shoobyman.sireatsalot.Utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,6 +100,25 @@ public class DiaryViewModel extends ViewModel implements Filterable {
             }
         }
     };
+
+    //TO DO: Fix to actually use the id
+    public void getFoodById(String id, Context context) {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        String url = NetworkUtils.getUrl();
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        System.out.println(response);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("There is error bruh: " + error.toString());
+                    }
+        });
+        queue.add(stringRequest);
+    }
 
     @Override
     protected void onCleared() {

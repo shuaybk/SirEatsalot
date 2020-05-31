@@ -2,23 +2,14 @@ package com.shoobyman.sireatsalot;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Filter;
-import android.widget.Filterable;
-
 import com.shoobyman.sireatsalot.databinding.ActivitySearchFoodBinding;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class SearchFoodActivity extends AppCompatActivity {
 
