@@ -6,6 +6,7 @@
     <string name="sign_in_failed_message">Unable to sign in</string>
 
     <!-- Button text -->
+    <string name="settings_menu_text">Settings</string>
     <string name="sign_out_menu_text">Sign Out</string>
     <string name="add_food_menu_text">Add Food</string>
     <string name="cancel_button">Cancel</string>

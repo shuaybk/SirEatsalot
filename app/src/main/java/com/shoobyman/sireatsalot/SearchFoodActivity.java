@@ -2,6 +2,7 @@ package com.shoobyman.sireatsalot;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -31,7 +32,6 @@ public class SearchFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_search_food);
         mData = new ViewModelProvider(this).get(DiaryViewModel.class);
-        //returnResult();
     }
 
     public void returnResult() {
@@ -42,13 +42,17 @@ public class SearchFoodActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.search_food_menu, menu);
+        getMenuInflater().inflate(R.menu.search_activity_main_menu, menu); //Main menu
+        initSearchBar(mBinding.searchBar.getMenu()); //Sub menu
 
+        return true;
+    }
+
+    private void initSearchBar(Menu menu) {
+        getMenuInflater().inflate(R.menu.search_food_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setIconifiedByDefault(false);
-        //ActionBar.LayoutParams params = new ActionBar.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.MATCH_PARENT);
-        //searchView.setLayoutParams(params);
         searchItem.expandActionView();
 
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
@@ -75,7 +79,6 @@ public class SearchFoodActivity extends AppCompatActivity {
                 return false;
             }
         });
-        return true;
     }
 
 }
