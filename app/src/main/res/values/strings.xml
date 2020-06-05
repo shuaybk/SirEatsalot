@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">SirEatsalot</string>
+
+    <!-- Display messages -->
+    <string name="sign_in_message">Click here to sign in or register!</string>
+    <string name="sign_in_failed_message">Unable to sign in</string>
+
+    <!-- Button text -->
+    <string name="settings_menu_text">Settings</string>
+    <string name="sign_out_menu_text">Sign Out</string>
+    <string name="add_food_menu_text">Add Food</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="add_button">Add</string>
+    <string name="add_breakfast_button_text">Add Breakfast</string>
+    <string name="add_lunch_button_text">Add Lunch</string>
+    <string name="add_dinner_button_text">Add Dinner</string>
+    <string name="add_snack_button_text">Add Snack</string>
+
+
+    <!-- Tab titles -->
+    <string name="nav_diary_tab_text">Diary</string>
+    <string name="nav_summary_tab_text">Summary</string>
+    <string name="nav_progress_tab_text">Progress</string>
+
+    <!-- Labels -->
+    <string name="food">Food</string>
+    <string name="breakfast_header_label">Breakfast</string>
+    <string name="lunch_header_label">Lunch</string>
+    <string name="dinner_header_label">Dinner</string>
+    <string name="snacks_header_label">Snacks</string>
+    <string name="food_search_bar_title">Search</string>
+
+    <!-- Hints -->
+    <string name="food_hint">Enter Food</string>
+
+
+</resources>

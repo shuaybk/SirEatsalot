@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:id="@+id/border1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/breakfast_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        android:layout_marginStart="@dimen/margin_start_header"
+                        android:text="@string/breakfast_header_label"
+                        app:layout_constraintTop_toBottomOf="@id/border1"/>
+                    <View
+                        android:id="@+id/border2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        app:layout_constraintTop_toBottomOf="@id/breakfast_header" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/breakfast_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/border2">
+
+                        <TextView
+                            android:id="@+id/breakfast_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                        <Button
+                            android:id="@+id/button_add_breakfast"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_breakfast_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/breakfast_food_list"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_breakfast" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/border3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="@dimen/margin_previous_meal"
+                        app:layout_constraintTop_toBottomOf="@id/breakfast_container" />
+                    <TextView
+                        android:id="@+id/lunch_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        android:layout_marginStart="@dimen/margin_start_header"
+                        android:text="@string/lunch_header_label"
+                        app:layout_constraintTop_toBottomOf="@id/border3"/>
+                    <View
+                        android:id="@+id/border4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        app:layout_constraintTop_toBottomOf="@id/lunch_header" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/lunch_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/border4">
+
+                        <TextView
+                            android:id="@+id/lunch_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                        <Button
+                            android:id="@+id/button_add_lunch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_lunch_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lunch_food_list"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_lunch" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/border5"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="@dimen/margin_previous_meal"
+                        app:layout_constraintTop_toBottomOf="@id/lunch_container" />
+                    <TextView
+                        android:id="@+id/dinner_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        android:layout_marginStart="@dimen/margin_start_header"
+                        android:text="@string/dinner_header_label"
+                        app:layout_constraintTop_toBottomOf="@id/border5"/>
+                    <View
+                        android:id="@+id/border6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        app:layout_constraintTop_toBottomOf="@id/dinner_header" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dinner_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/border6">
+
+                        <TextView
+                            android:id="@+id/dinner_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                        <Button
+                            android:id="@+id/button_add_dinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_dinner_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/dinner_food_list"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_dinner" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/border7"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="@dimen/margin_previous_meal"
+                        app:layout_constraintTop_toBottomOf="@id/dinner_container" />
+                    <TextView
+                        android:id="@+id/snacks_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        android:layout_marginStart="@dimen/margin_start_header"
+                        android:text="@string/snacks_header_label"
+                        app:layout_constraintTop_toBottomOf="@id/border7"/>
+                    <View
+                        android:id="@+id/border8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/border_divider_dark"
+                        android:layout_marginStart="@dimen/margin_divider_start_end"
+                        android:layout_marginEnd="@dimen/margin_divider_start_end"
+                        android:layout_marginTop="@dimen/margin_divider_top_bottom"
+                        app:layout_constraintTop_toBottomOf="@id/snacks_header" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/snacks_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/border8">
+
+                        <TextView
+                            android:id="@+id/snack_food_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Food list will go here (recyclerview)"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                        <Button
+                            android:id="@+id/button_add_snack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/add_snack_button_text"
+                            android:layout_marginTop="@dimen/margin_top_bottom_food_list"
+                            android:layout_marginBottom="@dimen/margin_divider_top_bottom"
+                            android:layout_marginStart="@dimen/margin_start_button"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/snack_food_list"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/border_divider_light"
+                            android:layout_marginStart="@dimen/margin_divider_start_end"
+                            android:layout_marginEnd="@dimen/margin_divider_start_end"
+                            app:layout_constraintTop_toBottomOf="@id/button_add_snack" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
