@@ -24,9 +24,10 @@ public class NetworkUtils {
     private static final String API_SECRET_VALUE = ApiReference.CONSUMER_SECRET;
     private static final String BASE_URL = "https://platform.fatsecret.com/rest/server.api";
     private static final String ENCODE_ALGORITHM = "HmacSHA1";
+    private static final int MAX_NUM_SEARCH_RESULTS = 8;
 
 
-    public static String getFindFoodByIdUrl() {
+    public static String getFindFoodByIdQueryUrl() {
         List<String> params = new ArrayList<>(Arrays.asList(generateOauthParams()));
         String[] template = new String[1];
         params.add("method=food.get.v2");
@@ -36,11 +37,12 @@ public class NetworkUtils {
         return url;
     }
 
-    public static String getSearchFoodQueryUrl() {
+    public static String getSearchFoodQueryUrl(String searchExp) {
         List<String> params = new ArrayList<>(Arrays.asList(generateOauthParams()));
         String[] template = new String[1];
-        params.add("method=food.get");
-        params.add("food_id=4384");
+        params.add("method=foods.search");
+        params.add("max_results="+MAX_NUM_SEARCH_RESULTS);
+        params.add("search_expression=" + searchExp);
         params.add("oauth_signature=" + sign(METHOD_GET, BASE_URL, params.toArray(template)));
         String url = BASE_URL + "?" + paramify(params.toArray(template));
         return url;

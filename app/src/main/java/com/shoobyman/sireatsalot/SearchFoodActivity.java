@@ -13,7 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 
+import com.shoobyman.sireatsalot.POJOs.Food;
+import com.shoobyman.sireatsalot.Utils.JSONUtils;
 import com.shoobyman.sireatsalot.databinding.ActivitySearchFoodBinding;
+
+import java.util.ArrayList;
 
 
 public class SearchFoodActivity extends AppCompatActivity {
@@ -44,6 +48,16 @@ public class SearchFoodActivity extends AppCompatActivity {
         return true;
     }
 
+    public void setResultsPreview(ArrayList<Food> resultList) {
+        String output = "";
+        for (Food food: resultList) {
+            System.out.println("Id="+food.getId() + ", name="+food.getName()+", type="+food.getType()+", brand="+food.getBrand()+", description="+food.getDescription()+", url="+food.getUrl());
+            output=output+food.getName()+"\n";
+        }
+        output+=resultList.size();
+        mBinding.searchResultsPreview.setText(output);
+    }
+
     private void initSearchBar(Menu menu) {
         getMenuInflater().inflate(R.menu.search_food_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
@@ -72,7 +86,7 @@ public class SearchFoodActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mData.getFilter().filter(newText);
+                mData.getFoodSearchResults(newText, SearchFoodActivity.this);
                 return false;
             }
         });

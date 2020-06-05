@@ -50,7 +50,6 @@ public class DiaryFragment extends Fragment {
         mBinding.buttonAddBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mData.getFoodById("", getContext());
                 startFoodSearch();
             }
         });
