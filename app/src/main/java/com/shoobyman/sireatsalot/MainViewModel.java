@@ -25,7 +25,7 @@ import com.shoobyman.sireatsalot.Utils.NetworkUtils;
 
 import java.util.ArrayList;
 
-public class DiaryViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
     private final String TAG = this.getClass().getSimpleName();
     private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
@@ -34,6 +34,7 @@ public class DiaryViewModel extends ViewModel {
         return fbAuth.getCurrentUser();
     }
     public ArrayList<Food> searchResultList = new ArrayList<>();
+    public Food currFood = null;
 
 
     public void signOut(final Context context) {
@@ -59,9 +60,24 @@ public class DiaryViewModel extends ViewModel {
 
 
     //TO DO: Fix to actually use the id
-    public void getFoodById(String id, Context context) {
-        String url = NetworkUtils.getFindFoodByIdQueryUrl();
-        sendApiQuery(url, context);
+    public void getFoodById(String id, final Context context) {
+        String url = NetworkUtils.getFindFoodByIdQueryUrl(id);
+        System.out.println("The url is " + url);
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                currFood = JSONUtils.jsonToFullFood(response);
+                ((AddFoodActivity)context).displayFoodDetails();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("There is error in getFoodById: " + error.toString());
+            }
+        });
+        queue.add(stringRequest);
     }
 
     public void getFoodSearchResults(String searchExp, final Context context) {
@@ -81,28 +97,12 @@ public class DiaryViewModel extends ViewModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("There is error bruh: " + error.toString());
+                System.out.println("There is error in getFoodSearchResults: " + error.toString());
             }
         });
         queue.add(stringRequest);
     }
 
-    public void sendApiQuery(String url, Context context) {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("There is error bruh: " + error.toString());
-            }
-        });
-        queue.add(stringRequest);
-    }
 
     @Override
     protected void onCleared() {

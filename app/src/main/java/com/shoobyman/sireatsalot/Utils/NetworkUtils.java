@@ -27,11 +27,11 @@ public class NetworkUtils {
     private static final int MAX_NUM_SEARCH_RESULTS = 12;
 
 
-    public static String getFindFoodByIdQueryUrl() {
+    public static String getFindFoodByIdQueryUrl(String id) {
         List<String> params = new ArrayList<>(Arrays.asList(generateOauthParams()));
         String[] template = new String[1];
         params.add("method=food.get.v2");
-        params.add("food_id=4384");
+        params.add("food_id="+id);
         params.add("oauth_signature=" + sign(METHOD_GET, BASE_URL, params.toArray(template)));
         String url = BASE_URL + "?" + paramify(params.toArray(template));
         return url;

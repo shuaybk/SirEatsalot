@@ -3,7 +3,6 @@ package com.shoobyman.sireatsalot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -27,16 +26,20 @@ public class ContentActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_FIND_FOOD = 10;
     public static final int RESULT_CODE_FOUND_FOOD = 11;
     public static final int RESULT_CODE_FOOD_NOT_FOUND = 12;
+    public static final int REQUEST_CODE_ADD_FOOD = 13;
+    public static final int RESULT_CODE_ADDED_FOOD = 14;
+    public static final int RESULT_CODE_NOT_ADDED_FOOD = 15;
+
 
     private ActivityContentBinding mBinding;
-    private DiaryViewModel mData;
+    private MainViewModel mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_content);
-        mData = new ViewModelProvider(this).get(DiaryViewModel.class);
+        mData = new ViewModelProvider(this).get(MainViewModel.class);
 
         init();
     }

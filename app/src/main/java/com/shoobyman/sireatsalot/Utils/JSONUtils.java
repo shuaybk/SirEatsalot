@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class JSONUtils {
     private final static String TAG = "JSONUtils";
     private final static String JSON_FOODS_OBJECT_KEY = "foods";
+    private final static String JSON_FOOD_OBJECT_KEY = "food";
     private final static String JSON_FOOD_ARRAY_KEY = "food";
     private final static String JSON_FOOD_ID_KEY = "food_id";
     private final static String JSON_FOOD_NAME_KEY = "food_name";
@@ -29,7 +30,7 @@ public class JSONUtils {
 
             for (int i = 0; i < jsonFoodArray.length(); i++) {
                 JSONObject jsonFoodObject = jsonFoodArray.getJSONObject(i);
-                foodList.add(jsonToFood(jsonFoodObject));
+                foodList.add(jsonToBasicFood(jsonFoodObject));
             }
         } catch (Exception e) {
             Log.e(TAG, "Exception in jsonListToFood: " + e.toString());
@@ -37,7 +38,7 @@ public class JSONUtils {
         return foodList;
     }
 
-    public static Food jsonToFood(JSONObject jsonFoodObject){
+    public static Food jsonToBasicFood(JSONObject jsonFoodObject){
         Food food = null;
         try {
             String id = jsonFoodObject.getString(JSON_FOOD_ID_KEY);
@@ -65,7 +66,43 @@ public class JSONUtils {
 
             food = new Food(id, name, type, brand, description, url);
         } catch (Exception e) {
-            Log.e(TAG, "Exception in jsonToFood: " + e.toString());
+            Log.e(TAG, "Exception in jsonToBasicFood: " + e.toString());
+        }
+
+        return food;
+    }
+
+    public static Food jsonToFullFood(String jsonData) {
+        Food food = null;
+        try {
+            JSONObject jsonFoodObject = new JSONObject(jsonData).getJSONObject(JSON_FOOD_OBJECT_KEY);
+
+            String id = jsonFoodObject.getString(JSON_FOOD_ID_KEY);
+            String name = "";
+            String type = "";
+            String brand = "";
+            String description = "";
+            String url = "";
+
+            if (jsonFoodObject.has(JSON_FOOD_NAME_KEY)) {
+                name = jsonFoodObject.getString(JSON_FOOD_NAME_KEY);
+            }
+            if (jsonFoodObject.has(JSON_FOOD_TYPE_KEY)) {
+                type = jsonFoodObject.getString(JSON_FOOD_TYPE_KEY);
+            }
+            if (jsonFoodObject.has(JSON_FOOD_BRAND_KEY)) {
+                brand = jsonFoodObject.getString(JSON_FOOD_BRAND_KEY);
+            }
+            if (jsonFoodObject.has(JSON_FOOD_DESCRIPTION_KEY)) {
+                description = jsonFoodObject.getString(JSON_FOOD_DESCRIPTION_KEY);
+            }
+            if (jsonFoodObject.has(JSON_FOOD_URL_KEY)) {
+                url = jsonFoodObject.getString(JSON_FOOD_URL_KEY);
+            }
+
+            food = new Food(id, name, type, brand, description, url);
+        } catch (Exception e) {
+            Log.e(TAG, "Exception in jsonToFullFood: " + e.toString());
         }
 
         return food;

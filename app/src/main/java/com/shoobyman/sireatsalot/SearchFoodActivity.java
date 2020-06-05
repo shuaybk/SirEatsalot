@@ -1,24 +1,21 @@
 package com.shoobyman.sireatsalot;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.shoobyman.sireatsalot.Adapters.SearchResultsRecyclerViewAdapter;
 import com.shoobyman.sireatsalot.POJOs.Food;
-import com.shoobyman.sireatsalot.Utils.JSONUtils;
 import com.shoobyman.sireatsalot.databinding.ActivitySearchFoodBinding;
 
 import java.util.ArrayList;
@@ -27,8 +24,10 @@ import java.util.ArrayList;
 public class SearchFoodActivity extends AppCompatActivity implements SearchResultsRecyclerViewAdapter.SearchItemClickListener {
 
     private final String TAG = this.getClass().getSimpleName();
+    protected static final String INTENT_EXTRA_FOOD_ID = "food_id_extra";
+
     ActivitySearchFoodBinding mBinding;
-    private DiaryViewModel mData;
+    private MainViewModel mData;
     SearchResultsRecyclerViewAdapter rvAdapter;
 
 
@@ -36,7 +35,7 @@ public class SearchFoodActivity extends AppCompatActivity implements SearchResul
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_search_food);
-        mData = new ViewModelProvider(this).get(DiaryViewModel.class);
+        mData = new ViewModelProvider(this).get(MainViewModel.class);
         init();
     }
 
@@ -107,6 +106,24 @@ public class SearchFoodActivity extends AppCompatActivity implements SearchResul
 
     @Override
     public void onSearchItemClick(Food food) {
-        Toast.makeText(this, "Clicked " + food.getName(), Toast.LENGTH_SHORT).show();
+        startAddFoodActivity(food.getId());
+    }
+
+
+    private void startAddFoodActivity(String foodId) {
+        Intent intent = new Intent(this, AddFoodActivity.class);
+        intent.putExtra(INTENT_EXTRA_FOOD_ID, foodId);
+        System.out.println("Setting extra food id as " + foodId);
+        startActivityForResult(intent, ContentActivity.REQUEST_CODE_ADD_FOOD);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ContentActivity.RESULT_CODE_ADDED_FOOD) {
+            Toast.makeText(this, data.getStringExtra("MESSAGE"), Toast.LENGTH_LONG).show();
+        } else if (resultCode == ContentActivity.RESULT_CODE_NOT_ADDED_FOOD) {
+            //Dunno lol
+        }
     }
 }
