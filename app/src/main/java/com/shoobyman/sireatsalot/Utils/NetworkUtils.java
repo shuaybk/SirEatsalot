@@ -24,7 +24,7 @@ public class NetworkUtils {
     private static final String API_SECRET_VALUE = ApiReference.CONSUMER_SECRET;
     private static final String BASE_URL = "https://platform.fatsecret.com/rest/server.api";
     private static final String ENCODE_ALGORITHM = "HmacSHA1";
-    private static final int MAX_NUM_SEARCH_RESULTS = 8;
+    private static final int MAX_NUM_SEARCH_RESULTS = 12;
 
 
     public static String getFindFoodByIdQueryUrl() {

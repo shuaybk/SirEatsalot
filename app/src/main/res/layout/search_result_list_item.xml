@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/food_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_start_search_list_item"
+        android:layout_marginTop="@dimen/margin_top_search_list_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="[Food Name]" />
+
+    <TextView
+        android:id="@+id/food_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_vertical_space_search_list_item"
+        android:paddingBottom="@dimen/padding_bottom_search_list_item"
+        app:layout_constraintStart_toStartOf="@id/food_name"
+        app:layout_constraintTop_toBottomOf="@id/food_name"
+        tools:text="[Brand Name]" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_thickness_search_results"
+        android:background="@color/border_divider_dark"
+        android:layout_marginStart="@dimen/margin_divider_start_end"
+        android:layout_marginEnd="@dimen/margin_divider_start_end"
+        app:layout_constraintTop_toBottomOf="@id/food_brand" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

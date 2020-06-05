@@ -5,14 +5,18 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.SearchView;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.shoobyman.sireatsalot.Adapters.SearchResultsRecyclerViewAdapter;
 import com.shoobyman.sireatsalot.POJOs.Food;
 import com.shoobyman.sireatsalot.Utils.JSONUtils;
 import com.shoobyman.sireatsalot.databinding.ActivitySearchFoodBinding;
@@ -20,11 +24,12 @@ import com.shoobyman.sireatsalot.databinding.ActivitySearchFoodBinding;
 import java.util.ArrayList;
 
 
-public class SearchFoodActivity extends AppCompatActivity {
+public class SearchFoodActivity extends AppCompatActivity implements SearchResultsRecyclerViewAdapter.SearchItemClickListener {
 
     private final String TAG = this.getClass().getSimpleName();
     ActivitySearchFoodBinding mBinding;
     private DiaryViewModel mData;
+    SearchResultsRecyclerViewAdapter rvAdapter;
 
 
     @Override
@@ -32,6 +37,13 @@ public class SearchFoodActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_search_food);
         mData = new ViewModelProvider(this).get(DiaryViewModel.class);
+        init();
+    }
+
+    public void init() {
+        rvAdapter = new SearchResultsRecyclerViewAdapter(this, mData.searchResultList, this);
+        mBinding.searchResultRecyclerview.setAdapter(rvAdapter);
+        mBinding.searchResultRecyclerview.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public void returnResult() {
@@ -49,13 +61,8 @@ public class SearchFoodActivity extends AppCompatActivity {
     }
 
     public void setResultsPreview(ArrayList<Food> resultList) {
-        String output = "";
-        for (Food food: resultList) {
-            System.out.println("Id="+food.getId() + ", name="+food.getName()+", type="+food.getType()+", brand="+food.getBrand()+", description="+food.getDescription()+", url="+food.getUrl());
-            output=output+food.getName()+"\n";
-        }
-        output+=resultList.size();
-        mBinding.searchResultsPreview.setText(output);
+        rvAdapter.updateSearchResults(resultList);
+        rvAdapter.notifyDataSetChanged();
     }
 
     private void initSearchBar(Menu menu) {
@@ -86,10 +93,20 @@ public class SearchFoodActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mData.getFoodSearchResults(newText, SearchFoodActivity.this);
+                if (newText.length() > 0) {
+                    mBinding.searchResultRecyclerview.setVisibility(View.VISIBLE);
+                    mData.getFoodSearchResults(newText, SearchFoodActivity.this);
+                } else {
+                    mBinding.searchResultRecyclerview.setVisibility(View.GONE);
+                    mData.searchResultList.clear();
+                }
                 return false;
             }
         });
     }
 
+    @Override
+    public void onSearchItemClick(Food food) {
+        Toast.makeText(this, "Clicked " + food.getName(), Toast.LENGTH_SHORT).show();
+    }
 }

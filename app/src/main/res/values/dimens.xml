@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <dimen name="divider_thickness_search_results">1dp</dimen>
     <dimen name="margin_divider_start_end">5dp</dimen>
     <dimen name="margin_divider_top_bottom">10dp</dimen>
     <dimen name="margin_start_header">20dp</dimen>
     <dimen name="margin_previous_meal">50dp</dimen>
     <dimen name="margin_start_button">20dp</dimen>
     <dimen name="margin_top_bottom_food_list">15dp</dimen>
+
+    <dimen name="margin_start_search_list_item">10dp</dimen>
+    <dimen name="margin_top_search_list_item">10dp</dimen>
+    <dimen name="margin_vertical_space_search_list_item">10dp</dimen>
+    <dimen name="padding_bottom_search_list_item">10dp</dimen>
+    <dimen name="margin_bottom_search_list_item">10dp</dimen>
 </resources>

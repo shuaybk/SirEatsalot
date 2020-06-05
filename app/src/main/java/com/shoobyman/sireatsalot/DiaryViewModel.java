@@ -33,6 +33,7 @@ public class DiaryViewModel extends ViewModel {
     public FirebaseUser getUser() {
         return fbAuth.getCurrentUser();
     }
+    public ArrayList<Food> searchResultList = new ArrayList<>();
 
 
     public void signOut(final Context context) {
@@ -71,8 +72,8 @@ public class DiaryViewModel extends ViewModel {
             @Override
             public void onResponse(String response) {
                 try {
-                    ArrayList<Food> foodList = JSONUtils.jsonListToFood(response);
-                    ((SearchFoodActivity) context).setResultsPreview(foodList);
+                    searchResultList = JSONUtils.jsonListToFood(response);
+                    ((SearchFoodActivity) context).setResultsPreview(searchResultList);
                 } catch (Exception e) {
                     Log.e(TAG, "There was an error returning the search results (Activity context changed probably): " + e.toString());
                 }
