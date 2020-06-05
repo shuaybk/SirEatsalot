@@ -1,5 +1,7 @@
 package com.shoobyman.sireatsalot.POJOs;
 
+import java.util.ArrayList;
+
 public class Food {
     private String id;
     private String name;
@@ -7,6 +9,7 @@ public class Food {
     private String brand;
     private String description;
     private String url;
+    private ArrayList<Serving> servingList;
 
     public Food(String id, String name, String type, String brand, String description, String url) {
         this.id = id;
@@ -63,5 +66,13 @@ public class Food {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public ArrayList<Serving> getServingList() {
+        return servingList;
+    }
+
+    public void setServingList(ArrayList<Serving> servingList) {
+        this.servingList = servingList;
     }
 }

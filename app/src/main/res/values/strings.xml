@@ -15,6 +15,7 @@
     <string name="add_lunch_button_text">Add Lunch</string>
     <string name="add_dinner_button_text">Add Dinner</string>
     <string name="add_snack_button_text">Add Snack</string>
+    <string name="add_food_button">Add Food</string>
 
 
     <!-- Tab titles -->
@@ -32,6 +33,7 @@
 
     <!-- Hints -->
     <string name="food_hint">Enter Food</string>
+    <string name="serving_entry_hint">1</string>
 
 
 </resources>

@@ -5,9 +5,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 
 import com.shoobyman.sireatsalot.POJOs.Food;
+import com.shoobyman.sireatsalot.POJOs.Serving;
 import com.shoobyman.sireatsalot.databinding.ActivityAddFoodBinding;
+
+import java.util.ArrayList;
 
 public class AddFoodActivity extends AppCompatActivity {
 
@@ -36,8 +40,16 @@ public class AddFoodActivity extends AppCompatActivity {
     }
 
     public void displayFoodDetails() {
-        mBinding.foodDetailsText.setText("Name = " + mData.currFood.getName() + ", Type = " + mData.currFood.getType());
-    }
+        ArrayList<String> servingType = new ArrayList<>();
 
+        for (Serving serving: mData.currFood.getServingList()) {
+            servingType.add(serving.getServing_descrip());
+        }
+
+        mBinding.foodDetailsText.setText("Name = " + mData.currFood.getName() + ", Type = " + mData.currFood.getType());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, servingType);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mBinding.servingTypeSpinner.setAdapter(adapter);
+    }
 
 }
