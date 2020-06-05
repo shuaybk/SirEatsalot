@@ -12,4 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
-API_KEY.txt
+/app/src/main/java/com/shoobyman/sireatsalot/Utils/ApiReference.java
+/app/google-services.json
+API_KEYS.txt
