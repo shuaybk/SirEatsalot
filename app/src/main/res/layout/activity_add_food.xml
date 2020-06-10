@@ -19,12 +19,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <Spinner
+                android:id="@+id/meal_entry_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/food_details_text"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <EditText
                 android:id="@+id/serving_entry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/serving_entry_hint"
-                app:layout_constraintTop_toBottomOf="@id/food_details_text"
+                android:text="@string/serving_entry_default"
+                app:layout_constraintTop_toBottomOf="@id/meal_entry_spinner"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <Spinner

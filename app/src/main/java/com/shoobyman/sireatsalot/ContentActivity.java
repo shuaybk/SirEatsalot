@@ -23,13 +23,6 @@ public class ContentActivity extends AppCompatActivity {
     public static final int FRAG_DIARY = 1;
     public static final int FRAG_SUMMARY = 2;
     public static final int FRAG_PROGRESS = 3;
-    public static final int REQUEST_CODE_FIND_FOOD = 10;
-    public static final int RESULT_CODE_FOUND_FOOD = 11;
-    public static final int RESULT_CODE_FOOD_NOT_FOUND = 12;
-    public static final int REQUEST_CODE_ADD_FOOD = 13;
-    public static final int RESULT_CODE_ADDED_FOOD = 14;
-    public static final int RESULT_CODE_NOT_ADDED_FOOD = 15;
-
 
     private ActivityContentBinding mBinding;
     private MainViewModel mData;

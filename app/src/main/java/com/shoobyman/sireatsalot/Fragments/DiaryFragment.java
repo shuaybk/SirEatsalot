@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.shoobyman.sireatsalot.ContentActivity;
 import com.shoobyman.sireatsalot.MainViewModel;
+import com.shoobyman.sireatsalot.R;
 import com.shoobyman.sireatsalot.SearchFoodActivity;
 import com.shoobyman.sireatsalot.databinding.FragmentDiaryBinding;
 
@@ -39,25 +40,25 @@ public class DiaryFragment extends Fragment {
         mBinding.buttonAddBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch();
+                startFoodSearch(getString(R.string.breakfast_item));
             }
         });
         mBinding.buttonAddLunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch();
+                startFoodSearch(getString(R.string.lunch_item));
             }
         });
         mBinding.buttonAddDinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch();
+                startFoodSearch(getString(R.string.dinner_item));
             }
         });
         mBinding.buttonAddSnack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch();
+                startFoodSearch(getString(R.string.snack_item));
             }
         });
     }
@@ -68,18 +69,9 @@ public class DiaryFragment extends Fragment {
     }
 
 
-    public void startFoodSearch() {
+    public void startFoodSearch(String mealType) {
         Intent intent = new Intent(getContext(), SearchFoodActivity.class);
-        startActivityForResult(intent, ContentActivity.REQUEST_CODE_FIND_FOOD);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ContentActivity.RESULT_CODE_FOUND_FOOD) {
-            Toast.makeText(getContext(), data.getStringExtra("MESSAGE"), Toast.LENGTH_LONG).show();
-        } else if (resultCode == ContentActivity.RESULT_CODE_FOOD_NOT_FOUND) {
-            //Dunno lol
-        }
+        intent.putExtra(MainViewModel.INTENT_EXTRA_MEAL_TYPE, mealType);
+        startActivity(intent);
     }
 }

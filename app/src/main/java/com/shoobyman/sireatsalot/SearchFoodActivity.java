@@ -20,11 +20,13 @@ import com.shoobyman.sireatsalot.databinding.ActivitySearchFoodBinding;
 
 import java.util.ArrayList;
 
+import static com.shoobyman.sireatsalot.MainViewModel.INTENT_EXTRA_MEAL_TYPE;
+
 
 public class SearchFoodActivity extends AppCompatActivity implements SearchResultsRecyclerViewAdapter.SearchItemClickListener {
 
     private final String TAG = this.getClass().getSimpleName();
-    protected static final String INTENT_EXTRA_FOOD_ID = "food_id_extra";
+    public static final String INTENT_EXTRA_FOOD_ID = "food_id_extra";
 
     ActivitySearchFoodBinding mBinding;
     private MainViewModel mData;
@@ -40,15 +42,10 @@ public class SearchFoodActivity extends AppCompatActivity implements SearchResul
     }
 
     public void init() {
+        mData.currMealType = getIntent().getStringExtra(INTENT_EXTRA_MEAL_TYPE);
         rvAdapter = new SearchResultsRecyclerViewAdapter(this, mData.searchResultList, this);
         mBinding.searchResultRecyclerview.setAdapter(rvAdapter);
         mBinding.searchResultRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    public void returnResult() {
-        Intent intent = new Intent();
-        setResult(ContentActivity.RESULT_CODE_FOUND_FOOD, intent);
-        finish();
     }
 
     @Override
@@ -113,17 +110,19 @@ public class SearchFoodActivity extends AppCompatActivity implements SearchResul
     private void startAddFoodActivity(String foodId) {
         Intent intent = new Intent(this, AddFoodActivity.class);
         intent.putExtra(INTENT_EXTRA_FOOD_ID, foodId);
+        intent.putExtra(INTENT_EXTRA_MEAL_TYPE, mData.currMealType);
         System.out.println("Setting extra food id as " + foodId);
-        startActivityForResult(intent, ContentActivity.REQUEST_CODE_ADD_FOOD);
+        startActivityForResult(intent, MainViewModel.REQUEST_CODE_ADD_FOOD);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ContentActivity.RESULT_CODE_ADDED_FOOD) {
-            Toast.makeText(this, data.getStringExtra("MESSAGE"), Toast.LENGTH_LONG).show();
-        } else if (resultCode == ContentActivity.RESULT_CODE_NOT_ADDED_FOOD) {
-            //Dunno lol
+        if (resultCode == MainViewModel.RESULT_CODE_ADDED_FOOD) {
+            Toast.makeText(this, "Added food success", Toast.LENGTH_LONG).show();
+            finish();
+        } else if (resultCode == MainViewModel.RESULT_CODE_NOT_ADDED_FOOD) {
+            Toast.makeText(this, "Error adding food, try again", Toast.LENGTH_LONG).show();
         }
     }
 }

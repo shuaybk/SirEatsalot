@@ -17,6 +17,11 @@
     <string name="add_snack_button_text">Add Snack</string>
     <string name="add_food_button">Add Food</string>
 
+    <!-- List Entries -->
+    <string name="breakfast_item">Breakfast</string>
+    <string name="lunch_item">Lunch</string>
+    <string name="dinner_item">Dinner</string>
+    <string name="snack_item">Snack</string>
 
     <!-- Tab titles -->
     <string name="nav_diary_tab_text">Diary</string>
@@ -33,7 +38,10 @@
 
     <!-- Hints -->
     <string name="food_hint">Enter Food</string>
-    <string name="serving_entry_hint">1</string>
+    <string name="serving_entry_hint">Enter amount</string>
+
+    <!-- Defaults -->
+    <string name="serving_entry_default">1</string>
 
 
 </resources>

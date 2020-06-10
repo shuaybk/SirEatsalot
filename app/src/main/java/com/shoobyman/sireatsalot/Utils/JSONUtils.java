@@ -26,7 +26,7 @@ public class JSONUtils {
 
     private final static String JSON_SERVINGS_ARRAY_KEY = "serving";
     private final static String JSON_SERVING_ID_KEY = "serving_id";
-    private final static String JSON_SERVING_MEASURE_DESCR_KEY = "measuarement_description";
+    private final static String JSON_SERVING_MEASURE_DESCR_KEY = "measurement_description";
     private final static String JSON_SERVING_NUM_UNITS_KEY = "number_of_units";
     private final static String JSON_SERVING_SERVING_DESCR_KEY = "serving_description";
     private final static String JSON_SERVING_CALORIES_KEY = "calories";
@@ -116,7 +116,11 @@ public class JSONUtils {
             }
             if (jsonFoodObject.has(JSON_FOOD_SERVINGS_KEY)) {
                 JSONObject servingsObj = jsonFoodObject.getJSONObject(JSON_FOOD_SERVINGS_KEY);
+                System.out.println("THE JSON FOR THE SERVINGS ISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+                Log.e(TAG, servingsObj.toString().substring(0, 2000));
+                Log.e(TAG, servingsObj.toString().substring(2000));
                 JSONArray servingsArray = servingsObj.optJSONArray(JSON_SERVINGS_ARRAY_KEY);
+                //If there is only one serving type, it's a JSONObject.  If there's more, it's a JSONArray
                 if (servingsArray == null) { //Sometimes its an array, sometimes it isn't.  So complicate :(
                     Serving serving = jsonToServing(servingsObj.optJSONObject(JSON_SERVINGS_ARRAY_KEY));
                     servingsList.add(serving);
