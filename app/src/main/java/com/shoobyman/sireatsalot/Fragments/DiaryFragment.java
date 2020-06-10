@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.shoobyman.sireatsalot.ContentActivity;
 import com.shoobyman.sireatsalot.MainViewModel;
 import com.shoobyman.sireatsalot.R;
 import com.shoobyman.sireatsalot.SearchFoodActivity;
