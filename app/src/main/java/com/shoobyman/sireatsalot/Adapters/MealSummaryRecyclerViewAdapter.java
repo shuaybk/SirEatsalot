@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.shoobyman.sireatsalot.POJOs.Food;
 import com.shoobyman.sireatsalot.POJOs.FoodEntry;
 import com.shoobyman.sireatsalot.R;
 
@@ -51,7 +50,7 @@ public class MealSummaryRecyclerViewAdapter extends RecyclerView.Adapter<MealSum
 
         holder.foodName.setText(foodEntry.getFoodName());
         holder.servingAmount.setText(foodEntry.getServingSummary());
-        holder.calorieCount.setText(foodEntry.getCalories());
+        holder.calorieCount.setText(""+foodEntry.getCalories());
     }
 
     @Override
