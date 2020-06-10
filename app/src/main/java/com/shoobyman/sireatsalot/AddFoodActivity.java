@@ -55,7 +55,7 @@ public class AddFoodActivity extends AppCompatActivity implements MainViewModel.
                 Serving serving = mData.currFood.getServingList().get(mData.currServingType);
 
                 String date = formatter.format(new Date());
-                String meal = getString(R.string.breakfast_item);
+                String meal = mData.currMealType;
                 String foodId = mData.currFood.getId();
                 String foodName = mData.currFood.getName();
                 String servingId = serving.getId();
@@ -111,7 +111,7 @@ public class AddFoodActivity extends AppCompatActivity implements MainViewModel.
         } else if (mData.currMealType.equals(getString(R.string.snack_item))) {
             mBinding.mealEntrySpinner.setSelection(3);
         }
-        
+
         ArrayAdapter<String> servingAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, servingType);
         servingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mBinding.servingTypeSpinner.setAdapter(servingAdapter);
