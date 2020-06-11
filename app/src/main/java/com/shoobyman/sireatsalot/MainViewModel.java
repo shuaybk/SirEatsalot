@@ -190,6 +190,20 @@ public class MainViewModel extends ViewModel {
         });
     }
 
+    public void deleteFoodByDocumentId(String documentId) {
+        fbDb.collection(FB_COLLECTION_USERS)
+                .document(fbAuth.getCurrentUser().getUid())
+                .collection(FB_COLLECTION_FOOD_DIARY)
+                .document(documentId)
+                .delete()
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Error in deleteFoodByDocumentId(): " + e.toString());
+                    }
+                });
+    }
+
     public void initDbListener(final DbDataListener dbDataListener) {
         this.dbDataListener = dbDataListener;
         if (diaryEntryListener == null) {

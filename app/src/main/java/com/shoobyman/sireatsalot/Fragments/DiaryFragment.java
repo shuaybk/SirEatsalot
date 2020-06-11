@@ -113,14 +113,16 @@ public class DiaryFragment extends Fragment
     }
 
     @Override
-    public void onMealItemLongClick(FoodEntry foodEntry) {
+    public void onMealItemLongClick(final FoodEntry foodEntry) {
         String[] options = {"Delete Item", "Move Item"};
         new MaterialAlertDialogBuilder(getContext())
                 .setTitle("Actions")
                 .setItems(options, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getContext(), "Selected " + which, Toast.LENGTH_SHORT).show();
+                        if (which == 0) {
+                            mData.deleteFoodByDocumentId(foodEntry.getDocumentId());
+                        }
                     }
                 })
                 .show();
