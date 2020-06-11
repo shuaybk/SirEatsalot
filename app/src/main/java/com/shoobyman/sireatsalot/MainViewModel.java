@@ -204,6 +204,7 @@ public class MainViewModel extends ViewModel {
                         snackList.clear();
                         for (DocumentSnapshot d: list) {
                             FoodEntry entry = d.toObject(FoodEntry.class);
+                            entry.setDocumentId(d.getId());
 
                             if (entry.getMeal().equals(App.BREAKFAST_KEY)) {
                                 breakfastList.add(entry);

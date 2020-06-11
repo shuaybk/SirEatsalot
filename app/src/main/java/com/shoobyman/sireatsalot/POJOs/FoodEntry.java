@@ -12,6 +12,7 @@ public class FoodEntry {
     private int proteins;   //in grams
     private int carbs;      //in grams
     private int fats;       //in grams
+    private String documentId;   //The ID of the document containing this entry , only populated when retrieved from Firebase
 
     public FoodEntry() {}
 
@@ -115,6 +116,14 @@ public class FoodEntry {
 
     public void setServingSummary(String servingSummary) {
         this.servingSummary = servingSummary;
+    }
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public String toString() {

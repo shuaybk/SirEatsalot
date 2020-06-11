@@ -111,6 +111,11 @@ public class DiaryFragment extends Fragment
     }
 
     @Override
+    public void onMealItemLongClick(FoodEntry foodEntry) {
+        //Launch dialog fragment for delete/edit options
+    }
+
+    @Override
     public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries) {
         breakfastAdapter.updateMealEntries(breakfastEntries);
         lunchAdapter.updateMealEntries(lunchEntries);

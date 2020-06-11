@@ -23,6 +23,7 @@ public class MealSummaryRecyclerViewAdapter extends RecyclerView.Adapter<MealSum
 
     public interface MealItemClickListener {
         void onMealItemClick(FoodEntry foodEntry);
+        void onMealItemLongClick(FoodEntry foodEntry);
     }
 
     public MealSummaryRecyclerViewAdapter(Context context, ArrayList<FoodEntry> mealEntryList, MealItemClickListener mealItemClickListener) {
@@ -59,7 +60,8 @@ public class MealSummaryRecyclerViewAdapter extends RecyclerView.Adapter<MealSum
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener, View.OnLongClickListener {
 
         TextView foodName;
         TextView servingAmount;
@@ -78,6 +80,13 @@ public class MealSummaryRecyclerViewAdapter extends RecyclerView.Adapter<MealSum
         public void onClick(View v) {
             FoodEntry foodEntry = mealEntryList.get(getAdapterPosition());
             mealItemClickListener.onMealItemClick(foodEntry);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            FoodEntry foodEntry = mealEntryList.get(getAdapterPosition());
+
+            return true;
         }
     }
 }
