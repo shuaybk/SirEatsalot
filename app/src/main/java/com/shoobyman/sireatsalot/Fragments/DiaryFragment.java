@@ -1,5 +1,6 @@
 package com.shoobyman.sireatsalot.Fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.shoobyman.sireatsalot.Adapters.MealSummaryRecyclerViewAdapter;
 import com.shoobyman.sireatsalot.MainViewModel;
 import com.shoobyman.sireatsalot.POJOs.FoodEntry;
@@ -112,7 +114,16 @@ public class DiaryFragment extends Fragment
 
     @Override
     public void onMealItemLongClick(FoodEntry foodEntry) {
-        //Launch dialog fragment for delete/edit options
+        String[] options = {"Delete Item", "Move Item"};
+        new MaterialAlertDialogBuilder(getContext())
+                .setTitle("Actions")
+                .setItems(options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "Selected " + which, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
     }
 
     @Override

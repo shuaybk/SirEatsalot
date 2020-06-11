@@ -74,6 +74,7 @@ public class MealSummaryRecyclerViewAdapter extends RecyclerView.Adapter<MealSum
             calorieCount = itemView.findViewById(R.id.calorie_count);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -85,7 +86,7 @@ public class MealSummaryRecyclerViewAdapter extends RecyclerView.Adapter<MealSum
         @Override
         public boolean onLongClick(View v) {
             FoodEntry foodEntry = mealEntryList.get(getAdapterPosition());
-
+            mealItemClickListener.onMealItemLongClick(foodEntry);
             return true;
         }
     }
