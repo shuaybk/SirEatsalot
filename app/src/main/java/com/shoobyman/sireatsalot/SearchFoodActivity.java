@@ -111,6 +111,7 @@ public class SearchFoodActivity extends AppCompatActivity implements SearchResul
         Intent intent = new Intent(this, AddFoodActivity.class);
         intent.putExtra(INTENT_EXTRA_FOOD_ID, foodId);
         intent.putExtra(INTENT_EXTRA_MEAL_TYPE, mData.currMealType);
+        intent.putExtra(MainViewModel.INTENT_EXTRA_DATE, getIntent().getStringExtra(MainViewModel.INTENT_EXTRA_DATE));
         System.out.println("Setting extra food id as " + foodId);
         startActivityForResult(intent, MainViewModel.REQUEST_CODE_ADD_FOOD);
     }

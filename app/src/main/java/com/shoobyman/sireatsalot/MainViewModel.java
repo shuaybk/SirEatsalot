@@ -23,27 +23,41 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.shoobyman.sireatsalot.POJOs.Food;
 import com.shoobyman.sireatsalot.POJOs.FoodEntry;
 import com.shoobyman.sireatsalot.Utils.JSONUtils;
 import com.shoobyman.sireatsalot.Utils.NetworkUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class MainViewModel extends ViewModel {
 
     private final String TAG = this.getClass().getSimpleName();
+    public static final String DATE_FORMAT_PATTERN = "dd/MM/yyyy";
     public static final String INTENT_EXTRA_MEAL_TYPE = "meal_type_extra";
+    public static final String INTENT_EXTRA_DATE = "date_extra";
     public static final int REQUEST_CODE_ADD_FOOD = 13;
     public static final int RESULT_CODE_ADDED_FOOD = 14;
     public static final int RESULT_CODE_NOT_ADDED_FOOD = 15;
     public static final String FB_COLLECTION_USERS = "users";
     public static final String FB_COLLECTION_FOOD_DIARY = "food_diary";
 
+
     private FirebaseAuth fbAuth = FirebaseAuth.getInstance();
     private FirebaseFirestore fbDb = FirebaseFirestore.getInstance();
     private int currentFragment = ContentActivity.FRAG_DIARY;
+    private EventListener<QuerySnapshot> diaryEntryListener;
     public FirebaseUser getUser() {
         return fbAuth.getCurrentUser();
     }
@@ -52,11 +66,43 @@ public class MainViewModel extends ViewModel {
     public int currServingType = 0;
     public String currMealType = null;
     public DbActionListener dbActionListener = null;
+    public DbDataListener dbDataListener = null;
+    public ArrayList<FoodEntry> breakfastList = new ArrayList<>();
+    public ArrayList<FoodEntry> lunchList = new ArrayList<>();
+    public ArrayList<FoodEntry> dinnerList = new ArrayList<>();
+    public ArrayList<FoodEntry> snackList = new ArrayList<>();
+    private Date currDate;
+    private ListenerRegistration mealsListenerRegistration;
 
     public interface DbActionListener {
         public void onFoodAdded();
         public void onErrorAddingFood();
     }
+    public interface DbDataListener {
+        public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries);
+        public void onRetrievedMealDataFailed();
+    }
+
+    public void initForDiaryFragment(DbDataListener dbDataListener) {
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_PATTERN);
+        currDate = new Date();
+        initDbListener(dbDataListener);
+    }
+
+    public Date getDate() {
+        return currDate;
+    }
+
+    public void setDate(Date date) {
+        currDate = date;
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT_PATTERN);
+        String date = formatter.format(currDate);
+        return date;
+    }
+
 
 
     public void signOut(final Context context) {
@@ -144,6 +190,51 @@ public class MainViewModel extends ViewModel {
         });
     }
 
+    public void initDbListener(final DbDataListener dbDataListener) {
+        this.dbDataListener = dbDataListener;
+        if (diaryEntryListener == null) {
+            diaryEntryListener = new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                        breakfastList.clear();
+                        lunchList.clear();
+                        dinnerList.clear();
+                        snackList.clear();
+                        for (DocumentSnapshot d: list) {
+                            FoodEntry entry = d.toObject(FoodEntry.class);
+
+                            if (entry.getMeal().equals(App.BREAKFAST_KEY)) {
+                                breakfastList.add(entry);
+                            } else if (entry.getMeal().equals(App.LUNCH_KEY)) {
+                                lunchList.add(entry);
+                            } else if (entry.getMeal().equals(App.DINNER_KEY)) {
+                                dinnerList.add(entry);
+                            } else if (entry.getMeal().equals(App.SNACK_KEY)) {
+                                snackList.add(entry);
+                            }
+                        }
+                        dbDataListener.onRetrievedMealDataSuccess(breakfastList, lunchList, dinnerList, snackList);
+                    }
+                }
+            };
+
+            setListenerDateFilter(dbDataListener, getFormattedDate());
+        }
+    }
+
+    public void setListenerDateFilter(DbDataListener dbDataListener, String newDate) {
+        this.dbDataListener = dbDataListener;
+        if (mealsListenerRegistration != null) {
+            mealsListenerRegistration.remove();
+        }
+        mealsListenerRegistration = fbDb.collection(FB_COLLECTION_USERS)
+                .document(fbAuth.getCurrentUser().getUid())
+                .collection(FB_COLLECTION_FOOD_DIARY)
+                .whereEqualTo("date", newDate)
+                .addSnapshotListener(diaryEntryListener);
+    }
 
     @Override
     protected void onCleared() {

@@ -51,16 +51,19 @@ public class AddFoodActivity extends AppCompatActivity implements MainViewModel.
         mBinding.buttonAddFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                 Serving serving = mData.currFood.getServingList().get(mData.currServingType);
 
-                String date = formatter.format(new Date());
+                String date = getIntent().getStringExtra(MainViewModel.INTENT_EXTRA_DATE);
                 String meal = mData.currMealType;
                 String foodId = mData.currFood.getId();
                 String foodName = mData.currFood.getName();
                 String servingId = serving.getId();
                 String servingSummary;
                 float amount = Float.parseFloat(mBinding.servingEntry.getText().toString());
+                int calories = Math.round(amount * Float.parseFloat(serving.getCalories()));
+                int proteins = Math.round(amount * Float.parseFloat(serving.getProtein()));
+                int carbs = Math.round(amount * Float.parseFloat(serving.getCarb()));
+                int fats = Math.round(amount * Float.parseFloat(serving.getFat()));
 
                 servingSummary = Float.toString(Float.parseFloat(serving.getNum_units())*amount) + " " + serving.getMeasure_descrip();
 
@@ -72,10 +75,10 @@ public class AddFoodActivity extends AppCompatActivity implements MainViewModel.
                         servingId,
                         servingSummary,
                         amount,
-                        0,
-                        0,
-                        0,
-                        0
+                        calories,
+                        proteins,
+                        carbs,
+                        fats
                 );
                 mData.addFoodToDb(entry, AddFoodActivity.this);
             }

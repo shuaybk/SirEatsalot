@@ -13,6 +13,8 @@ public class FoodEntry {
     private int carbs;      //in grams
     private int fats;       //in grams
 
+    public FoodEntry() {}
+
     public FoodEntry(String date, String meal, String foodId, String foodName, String servingId, String servingSummary, float servingAmount, int calories, int proteins, int carbs, int fats) {
         this.date = date;
         this.meal = meal;
@@ -113,5 +115,21 @@ public class FoodEntry {
 
     public void setServingSummary(String servingSummary) {
         this.servingSummary = servingSummary;
+    }
+
+    public String toString() {
+        String result = ""
+                + "date=" + date + ","
+                + "meal=" + meal + ","
+                + "foodId=" + foodId + ","
+                + "foodName=" + foodName + ","
+                + "servingId=" + servingId + ","
+                + "servingSummary=" + servingSummary + ","
+                + "servingAmount=" + servingAmount + ","
+                + "calories=" + calories + ","
+                + "proteins=" + proteins + ","
+                + "carbs=" + carbs + ","
+                + "fats=" + fats;
+        return result;
     }
 }

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,14 +22,21 @@ import com.shoobyman.sireatsalot.SearchFoodActivity;
 import com.shoobyman.sireatsalot.databinding.FragmentDiaryBinding;
 
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Date;
 
-public class DiaryFragment extends Fragment implements MealSummaryRecyclerViewAdapter.MealItemClickListener {
+public class DiaryFragment extends Fragment
+        implements MealSummaryRecyclerViewAdapter.MealItemClickListener,
+                MainViewModel.DbDataListener,
+                CalendarDialog.DateChangeListener {
 
     private final String TAG = this.getClass().getSimpleName();
 
     FragmentDiaryBinding mBinding;
     private MainViewModel mData;
+    MealSummaryRecyclerViewAdapter breakfastAdapter;
+    MealSummaryRecyclerViewAdapter lunchAdapter;
+    MealSummaryRecyclerViewAdapter dinnerAdapter;
+    MealSummaryRecyclerViewAdapter snackAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,10 +48,21 @@ public class DiaryFragment extends Fragment implements MealSummaryRecyclerViewAd
     }
 
     public void init() {
-        MealSummaryRecyclerViewAdapter breakfastAdapter = new MealSummaryRecyclerViewAdapter(getContext(), new ArrayList<FoodEntry>(), this);
-        MealSummaryRecyclerViewAdapter lunchAdapter = new MealSummaryRecyclerViewAdapter(getContext(), new ArrayList<FoodEntry>(), this);
-        MealSummaryRecyclerViewAdapter dinnerAdapter = new MealSummaryRecyclerViewAdapter(getContext(), new ArrayList<FoodEntry>(), this);
-        MealSummaryRecyclerViewAdapter snackAdapter = new MealSummaryRecyclerViewAdapter(getContext(), new ArrayList<FoodEntry>(), this);
+        mData.initForDiaryFragment(this);
+
+        mBinding.selectedDate.setText(mData.getFormattedDate());
+        mBinding.selectedDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment calendarFrag = new CalendarDialog(mData.getDate(), DiaryFragment.this);
+                calendarFrag.show(getParentFragmentManager(), "datePicker");
+            }
+        });
+
+        breakfastAdapter = new MealSummaryRecyclerViewAdapter(getContext(), mData.breakfastList, this);
+        lunchAdapter = new MealSummaryRecyclerViewAdapter(getContext(), mData.lunchList, this);
+        dinnerAdapter = new MealSummaryRecyclerViewAdapter(getContext(), mData.dinnerList, this);
+        snackAdapter = new MealSummaryRecyclerViewAdapter(getContext(), mData.snackList, this);
         mBinding.breakfastFoodList.setAdapter(breakfastAdapter);
         mBinding.lunchFoodList.setAdapter(lunchAdapter);
         mBinding.dinnerFoodList.setAdapter(dinnerAdapter);
@@ -56,43 +75,62 @@ public class DiaryFragment extends Fragment implements MealSummaryRecyclerViewAd
         mBinding.buttonAddBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch(getString(R.string.breakfast_item));
+                startFoodSearch(getString(R.string.breakfast_item), mData.getFormattedDate());
             }
         });
         mBinding.buttonAddLunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch(getString(R.string.lunch_item));
+                startFoodSearch(getString(R.string.lunch_item), mData.getFormattedDate());
             }
         });
         mBinding.buttonAddDinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch(getString(R.string.dinner_item));
+                startFoodSearch(getString(R.string.dinner_item), mData.getFormattedDate());
             }
         });
         mBinding.buttonAddSnack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFoodSearch(getString(R.string.snack_item));
+                startFoodSearch(getString(R.string.snack_item), mData.getFormattedDate());
             }
         });
     }
 
-    private String nonce(){
-        int randomNum = new Random().nextInt((10000000 - 1) + 1) + 1;
-        return Integer.toString(randomNum);
-    }
-
-
-    public void startFoodSearch(String mealType) {
+    public void startFoodSearch(String mealType, String date) {
         Intent intent = new Intent(getContext(), SearchFoodActivity.class);
         intent.putExtra(MainViewModel.INTENT_EXTRA_MEAL_TYPE, mealType);
+        intent.putExtra(MainViewModel.INTENT_EXTRA_DATE, date);
         startActivity(intent);
     }
 
     @Override
     public void onMealItemClick(FoodEntry foodEntry) {
         Toast.makeText(getContext(), "Clicked on " + foodEntry.getFoodName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries) {
+        breakfastAdapter.updateMealEntries(breakfastEntries);
+        lunchAdapter.updateMealEntries(lunchEntries);
+        dinnerAdapter.updateMealEntries(dinnerEntries);
+        snackAdapter.updateMealEntries(snackEntries);
+        breakfastAdapter.notifyDataSetChanged();
+        lunchAdapter.notifyDataSetChanged();
+        dinnerAdapter.notifyDataSetChanged();
+        snackAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onRetrievedMealDataFailed() {
+        Toast.makeText(getContext(), "Failed retrieving meal entry data", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDateChanged(Date date) {
+        mData.setDate(date);
+        mData.setListenerDateFilter(this, mData.getFormattedDate());
+        mBinding.selectedDate.setText(mData.getFormattedDate());
     }
 }
