@@ -117,8 +117,12 @@ public class JSONUtils {
             if (jsonFoodObject.has(JSON_FOOD_SERVINGS_KEY)) {
                 JSONObject servingsObj = jsonFoodObject.getJSONObject(JSON_FOOD_SERVINGS_KEY);
                 System.out.println("THE JSON FOR THE SERVINGS ISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
-                Log.e(TAG, servingsObj.toString().substring(0, 2000));
-                Log.e(TAG, servingsObj.toString().substring(2000));
+                if (servingsObj.toString().length() > 2000) {
+                    Log.e(TAG, servingsObj.toString().substring(0, 2000));
+                    Log.e(TAG, servingsObj.toString().substring(2000));
+                } else {
+                    Log.e(TAG, servingsObj.toString());
+                }
                 JSONArray servingsArray = servingsObj.optJSONArray(JSON_SERVINGS_ARRAY_KEY);
                 //If there is only one serving type, it's a JSONObject.  If there's more, it's a JSONArray
                 if (servingsArray == null) { //Sometimes its an array, sometimes it isn't.  So complicate :(
