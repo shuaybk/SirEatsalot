@@ -86,8 +86,8 @@ public class ContentActivity extends AppCompatActivity {
             case R.id.sign_out_menu_item:
                 mData.signOut(this);
                 return true;
-            case R.id.add_food_menu_item:
-                return true;
+            //case R.id.add_food_menu_item:
+            //    return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
