@@ -63,6 +63,7 @@ public class MainViewModel extends ViewModel {
     }
     public ArrayList<Food> searchResultList = new ArrayList<>();
     public Food currFood = null;
+    public int calorieTotal = 0;
     public int currServingType = 0;
     public String currMealType = null;
     public DbActionListener dbActionListener = null;
@@ -79,7 +80,7 @@ public class MainViewModel extends ViewModel {
         public void onErrorAddingFood();
     }
     public interface DbDataListener {
-        public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries, int calorieTotal);
+        public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries);
         public void onRetrievedMealDataFailed();
     }
 
@@ -206,38 +207,35 @@ public class MainViewModel extends ViewModel {
 
     public void initDbListener(final DbDataListener dbDataListener) {
         this.dbDataListener = dbDataListener;
-        if (diaryEntryListener == null) {
-            diaryEntryListener = new EventListener<QuerySnapshot>() {
-                @Override
-                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    if (queryDocumentSnapshots != null) {
-                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                        breakfastList.clear();
-                        lunchList.clear();
-                        dinnerList.clear();
-                        snackList.clear();
-                        int calorieTotal = 0;
-                        for (DocumentSnapshot d: list) {
-                            FoodEntry entry = d.toObject(FoodEntry.class);
-                            entry.setDocumentId(d.getId());
-                            calorieTotal += entry.getCalories();
-                            if (entry.getMeal().equals(App.BREAKFAST_KEY)) {
-                                breakfastList.add(entry);
-                            } else if (entry.getMeal().equals(App.LUNCH_KEY)) {
-                                lunchList.add(entry);
-                            } else if (entry.getMeal().equals(App.DINNER_KEY)) {
-                                dinnerList.add(entry);
-                            } else if (entry.getMeal().equals(App.SNACK_KEY)) {
-                                snackList.add(entry);
-                            }
+        diaryEntryListener = new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+                if (queryDocumentSnapshots != null) {
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    breakfastList.clear();
+                    lunchList.clear();
+                    dinnerList.clear();
+                    snackList.clear();
+                    calorieTotal = 0;
+                    for (DocumentSnapshot d: list) {
+                        FoodEntry entry = d.toObject(FoodEntry.class);
+                        entry.setDocumentId(d.getId());
+                        calorieTotal += entry.getCalories();
+                        if (entry.getMeal().equals(App.BREAKFAST_KEY)) {
+                            breakfastList.add(entry);
+                        } else if (entry.getMeal().equals(App.LUNCH_KEY)) {
+                            lunchList.add(entry);
+                        } else if (entry.getMeal().equals(App.DINNER_KEY)) {
+                            dinnerList.add(entry);
+                        } else if (entry.getMeal().equals(App.SNACK_KEY)) {
+                            snackList.add(entry);
                         }
-                        dbDataListener.onRetrievedMealDataSuccess(breakfastList, lunchList, dinnerList, snackList, calorieTotal);
                     }
+                    dbDataListener.onRetrievedMealDataSuccess(breakfastList, lunchList, dinnerList, snackList);
                 }
-            };
-
-            setListenerDateFilter(dbDataListener, getFormattedDate());
-        }
+            }
+        };
+        setListenerDateFilter(dbDataListener, getFormattedDate());
     }
 
     public void setListenerDateFilter(DbDataListener dbDataListener, String newDate) {
@@ -251,6 +249,7 @@ public class MainViewModel extends ViewModel {
                 .whereEqualTo("date", newDate)
                 .addSnapshotListener(diaryEntryListener);
     }
+
 
     @Override
     protected void onCleared() {

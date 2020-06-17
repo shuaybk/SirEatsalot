@@ -50,6 +50,7 @@ public class DiaryFragment extends Fragment
     }
 
     public void init() {
+        mBinding.calorieTotal.setText(" "+mData.calorieTotal);
         mData.initForDiaryFragment(this);
 
         mBinding.selectedDate.setText(mData.getFormattedDate());
@@ -129,7 +130,7 @@ public class DiaryFragment extends Fragment
     }
 
     @Override
-    public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries, int calorieTotal) {
+    public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries) {
         breakfastAdapter.updateMealEntries(breakfastEntries);
         lunchAdapter.updateMealEntries(lunchEntries);
         dinnerAdapter.updateMealEntries(dinnerEntries);
@@ -139,7 +140,7 @@ public class DiaryFragment extends Fragment
         dinnerAdapter.notifyDataSetChanged();
         snackAdapter.notifyDataSetChanged();
 
-        mBinding.calorieTotal.setText(" "+calorieTotal);
+        mBinding.calorieTotal.setText(" "+mData.calorieTotal);
     }
 
     @Override

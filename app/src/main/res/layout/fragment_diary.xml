@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -11,14 +11,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <Button
                 android:id="@+id/selected_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_start_end_date_selector"
-                android:layout_marginEnd="@dimen/margin_start_end_date_selector"
-                android:paddingTop="@dimen/padding_top_bottom_date_selector"
-                android:paddingBottom="@dimen/padding_bottom_search_list_item"
                 android:textAlignment="center"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="[Selected Date]" />
@@ -43,7 +39,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/total_calorie_label"/>
+                        android:text="@string/total_calorie_label" />
+
                     <TextView
                         android:id="@+id/calorie_total"
                         android:layout_width="wrap_content"
@@ -51,6 +48,12 @@
                         tools:text="[Calorie total]"/>
 
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_thickness_summary"
+                    android:background="@color/border_divider_dark"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,6 +82,7 @@
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
                         android:layout_marginStart="@dimen/margin_start_header"
                         android:text="@string/breakfast_header_label"
+                        style="@style/header_text1"
                         app:layout_constraintTop_toBottomOf="@id/border1"/>
                     <View
                         android:id="@+id/border2"
@@ -138,6 +142,7 @@
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
                         android:layout_marginStart="@dimen/margin_start_header"
                         android:text="@string/lunch_header_label"
+                        style="@style/header_text1"
                         app:layout_constraintTop_toBottomOf="@id/border3"/>
                     <View
                         android:id="@+id/border4"
@@ -197,6 +202,7 @@
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
                         android:layout_marginStart="@dimen/margin_start_header"
                         android:text="@string/dinner_header_label"
+                        style="@style/header_text1"
                         app:layout_constraintTop_toBottomOf="@id/border5"/>
                     <View
                         android:id="@+id/border6"
@@ -256,6 +262,7 @@
                         android:layout_marginTop="@dimen/margin_divider_top_bottom"
                         android:layout_marginStart="@dimen/margin_start_header"
                         android:text="@string/snacks_header_label"
+                        style="@style/header_text1"
                         app:layout_constraintTop_toBottomOf="@id/border7"/>
                     <View
                         android:id="@+id/border8"

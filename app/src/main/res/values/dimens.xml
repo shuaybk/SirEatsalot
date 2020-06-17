@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="divider_thickness_search_results">1dp</dimen>
+    <dimen name="divider_thickness_summary">2dp</dimen>
     <dimen name="margin_divider_start_end">5dp</dimen>
     <dimen name="margin_divider_top_bottom">10dp</dimen>
     <dimen name="margin_start_header">20dp</dimen>

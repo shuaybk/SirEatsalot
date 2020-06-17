@@ -39,7 +39,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/divider_thickness_search_results"
-        android:background="@color/border_divider_dark"
+        android:background="@color/border_divider_light"
         android:layout_marginStart="@dimen/margin_divider_start_end"
         android:layout_marginEnd="@dimen/margin_divider_start_end"
         app:layout_constraintTop_toBottomOf="@id/serving_amount" />
