@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main_container"
             android:layout_width="match_parent"
@@ -24,10 +23,41 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="[Selected Date]" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cal_summary_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/selected_date">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_top_bottom_diary_summary"
+                    android:layout_marginBottom="@dimen/margin_top_bottom_diary_summary"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_calorie_label"/>
+                    <TextView
+                        android:id="@+id/calorie_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="[Calorie total]"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/selected_date"
+                app:layout_constraintTop_toBottomOf="@id/cal_summary_container"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout

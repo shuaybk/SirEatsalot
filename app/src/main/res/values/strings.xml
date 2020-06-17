@@ -35,6 +35,7 @@
     <string name="dinner_header_label">Dinner</string>
     <string name="snacks_header_label">Snacks</string>
     <string name="food_search_bar_title">Search</string>
+    <string name="total_calorie_label">Total Calories:</string>
 
     <!-- Hints -->
     <string name="food_hint">Enter Food</string>

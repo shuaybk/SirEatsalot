@@ -79,7 +79,7 @@ public class MainViewModel extends ViewModel {
         public void onErrorAddingFood();
     }
     public interface DbDataListener {
-        public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries);
+        public void onRetrievedMealDataSuccess(ArrayList<FoodEntry> breakfastEntries, ArrayList<FoodEntry> lunchEntries, ArrayList<FoodEntry> dinnerEntries, ArrayList<FoodEntry> snackEntries, int calorieTotal);
         public void onRetrievedMealDataFailed();
     }
 
@@ -210,16 +210,17 @@ public class MainViewModel extends ViewModel {
             diaryEntryListener = new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                    if (!queryDocumentSnapshots.isEmpty()) {
+                    if (queryDocumentSnapshots != null) {
                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                         breakfastList.clear();
                         lunchList.clear();
                         dinnerList.clear();
                         snackList.clear();
+                        int calorieTotal = 0;
                         for (DocumentSnapshot d: list) {
                             FoodEntry entry = d.toObject(FoodEntry.class);
                             entry.setDocumentId(d.getId());
-
+                            calorieTotal += entry.getCalories();
                             if (entry.getMeal().equals(App.BREAKFAST_KEY)) {
                                 breakfastList.add(entry);
                             } else if (entry.getMeal().equals(App.LUNCH_KEY)) {
@@ -230,7 +231,7 @@ public class MainViewModel extends ViewModel {
                                 snackList.add(entry);
                             }
                         }
-                        dbDataListener.onRetrievedMealDataSuccess(breakfastList, lunchList, dinnerList, snackList);
+                        dbDataListener.onRetrievedMealDataSuccess(breakfastList, lunchList, dinnerList, snackList, calorieTotal);
                     }
                 }
             };
